@@ -1,0 +1,369 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #020617;
+  --fg: #e5e7eb;
+  --fg-muted: #9ca3af;
+  --accent: #22c55e;
+  --accent-soft: rgba(34, 197, 94, 0.1);
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  color: var(--fg);
+  background: transparent;
+}
+
+/* starfield canvas behind everything */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  display: block;
+}
+
+/* App layout */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(14px);
+  background: rgba(2, 6, 23, 0.92);
+}
+
+.navbar-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1.1rem 3rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: #f9fafb;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.nav-links a {
+  color: var(--fg-muted);
+  text-decoration: none;
+  padding: 0.1rem 0;
+  transition: color 0.15s ease;
+}
+
+.nav-links a:hover {
+  color: #f9fafb;
+}
+
+/* Hero base */
+.hero {
+  max-width: 1040px;
+  margin: 3.5rem auto 4rem;
+  padding: 0 3rem;
+  min-height: calc(100vh - 96px);
+  display: flex;
+  gap: 3rem;
+}
+
+.hero-left {
+  max-width: 560px;
+}
+
+/* Card-style hero layout */
+.hero.hero-row {
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4rem;
+}
+
+/* Left card like reference */
+.hero-card {
+  width: 320px;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #111827 0, #020617 55%);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.85);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-card-photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.hero-card-body {
+  padding: 1.5rem 1.6rem 1.4rem;
+}
+
+.hero-card-name {
+  margin: 0 0 0.4rem;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.hero-card-meta {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+
+.hero-card-links {
+  margin-bottom: 1rem;
+}
+
+.hero-card-resume {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Shared hero text */
+.hero-kicker {
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 0.75rem;
+}
+
+.hero-title {
+  font-size: 3.1rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.hero-body {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--fg-muted);
+  margin: 0 0 1.75rem;
+}
+
+.hero-body-wide {
+  max-width: 540px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* right column text like “Software RESEARCHER” */
+.hero-stack {
+  flex: 1;
+}
+
+.hero-role {
+  margin: 0;
+  font-size: 3.3rem;
+  font-weight: 700;
+}
+
+.hero-role-static {
+  background: linear-gradient(90deg, #ec4899, #a855f7);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-rotating-role {
+  margin: 0.4rem 0 1.2rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  animation: fadeRole 2.2s ease-in-out infinite;
+}
+
+@keyframes fadeRole {
+  0%,
+  15% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  25%,
+  75% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Links row */
+.hero-links {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hero-links a {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.hero-links img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.btn.primary {
+  background: #f9fafb;
+  color: #020617;
+}
+
+.btn.primary:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: rgba(148, 163, 184, 0.5);
+  color: var(--fg);
+}
+
+.btn.ghost:hover {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+/* Stacked sections */
+.stack-section {
+  max-width: 1040px;
+  margin: 0 auto 3.5rem;
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  column-gap: 3rem;
+  row-gap: 0.75rem;
+}
+
+.stack-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-muted);
+}
+
+.stack-body {
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.stack-entry + .stack-entry {
+  margin-top: 1.2rem;
+}
+
+.stack-entry h3 {
+  margin: 0 0 0.15rem;
+  font-size: 1rem;
+  color: var(--fg);
+}
+
+.stack-entry p {
+  margin: 0.1rem 0;
+}
+
+.stack-tags {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-muted);
+}
+
+/* Contact link */
+.contact-email {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-email:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .navbar-inner,
+  .hero,
+  .stack-section {
+    padding-inline: 1.5rem;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    margin-top: 2.5rem;
+  }
+
+  .hero.hero-row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .stack-section {
+    grid-template-columns: 1fr;
+    row-gap: 0.3rem;
+  }
+}
