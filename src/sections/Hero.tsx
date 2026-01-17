@@ -5,12 +5,9 @@ import githubIcon from "../assets/github.png";
 import instagramIcon from "../assets/instagram.webp";
 import linkedinIcon from "../assets/linkedin.webp";
 import twitterIcon from "../assets/twitter.png";
+import { TechBackground } from "../components/TechBackground";
 
-const roles = [
-  "Web Developer",
-  "Cybersecurity Enthusiast",
-  "Systems Learner",
-];
+const roles = ["Web Developer", "Cybersecurity Enthusiast", "Systems Learner"];
 
 const Hero: React.FC = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -24,10 +21,16 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section id="top" className="hero hero-row">
-      {/* LEFT: text */}
+    <section id="top" className="hero hero-row hero-has-bg">
+      {/* Background ONLY for Hero */}
+      <div className="hero-bg">
+        <TechBackground />
+      </div>
+
+      {/* LEFT: text (direct child of hero-row) */}
       <div className="hero-right hero-stack">
         <p className="hero-kicker">SOFTWARE</p>
+
         <h2 className="hero-role">
           <span className="hero-role-static">RESEARCHER.</span>
         </h2>
@@ -50,7 +53,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* RIGHT: photo + name card */}
+      {/* RIGHT: photo + name card (direct child of hero-row) */}
       <div className="hero-card">
         <div className="hero-card-photo">
           <img src={avatar} alt="Aviyan Dhital" />
@@ -62,14 +65,14 @@ const Hero: React.FC = () => {
             <br />
             Dhital
           </h1>
-          <p className="hero-card-meta">
-            CS @ Texas State · Web dev · Security
-          </p>
+
+          <p className="hero-card-meta">CS @ Texas State · Web dev · Security</p>
 
           <div className="hero-links hero-card-links">
             <a href="mailto:aviyandhital@gmail.com">
               <img src={emailIcon} alt="Email" />
             </a>
+
             <a
               href="https://linkedin.com/in/aviyandhital"
               target="_blank"
@@ -77,6 +80,7 @@ const Hero: React.FC = () => {
             >
               <img src={linkedinIcon} alt="LinkedIn" />
             </a>
+
             <a
               href="https://github.com/aviyannn"
               target="_blank"
@@ -84,6 +88,7 @@ const Hero: React.FC = () => {
             >
               <img src={githubIcon} alt="GitHub" />
             </a>
+
             <a
               href="https://instagram.com/aviyan__"
               target="_blank"
@@ -91,11 +96,8 @@ const Hero: React.FC = () => {
             >
               <img src={instagramIcon} alt="Instagram" />
             </a>
-            <a
-              href="https://x.com/AviYawns"
-              target="_blank"
-              rel="noreferrer"
-            >
+
+            <a href="https://x.com/AviYawns" target="_blank" rel="noreferrer">
               <img src={twitterIcon} alt="X (Twitter)" />
             </a>
           </div>

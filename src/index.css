@@ -17,25 +17,32 @@ body,
 #root {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
     "Segoe UI", sans-serif;
   color: var(--fg);
-  background: transparent;
+  background: var(--bg);
 }
 
-/* starfield canvas behind everything */
-.starfield {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  display: block;
+/* animation for tech icons */
+@keyframes float-slow {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-float-slow {
+  animation-name: float-slow;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 /* App layout */
@@ -43,6 +50,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--bg);
 }
 
 /* Navbar */
@@ -57,7 +65,7 @@ body {
 .navbar-inner {
   max-width: 1040px;
   margin: 0 auto;
-  padding: 1.1rem 3rem 0.9rem;
+  padding: 0.7rem 3rem 0.6rem; /* reduced height */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,8 +100,8 @@ body {
 /* Hero base */
 .hero {
   max-width: 1040px;
-  margin: 3.5rem auto 4rem;
-  padding: 0 3rem;
+  margin: 0 auto 4rem;        /* no big top margin */
+  padding: 1.5rem 3rem 0;     /* small spacing under navbar */
   min-height: calc(100vh - 96px);
   display: flex;
   gap: 3rem;
@@ -366,4 +374,43 @@ body {
     grid-template-columns: 1fr;
     row-gap: 0.3rem;
   }
+}
+
+/* Hero background layering (ONLY for Hero) */
+.hero-has-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  /* ✅ make it subtle + avoid that "left strip" look */
+  opacity: 0.12;
+  filter: blur(0.3px);
+  transform: scale(1.15);
+}
+
+/* keep hero content above the background */
+.hero-has-bg > *:not(.hero-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-has-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 6, 23, 1) 0%,
+    rgba(2, 6, 23, 0.92) 18%,
+    rgba(2, 6, 23, 0.45) 45%,
+    rgba(2, 6, 23, 0) 72%
+  );
 }

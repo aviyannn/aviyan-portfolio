@@ -1,6 +1,6 @@
+// src/App.tsx
 import React from "react";
 import Navbar from "./components/Navbar";
-import Starfield from "./components/Starfield";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Experience from "./sections/Experience";
@@ -11,7 +11,6 @@ import Contact from "./sections/Contact";
 const App: React.FC = () => {
   return (
     <div className="app-root">
-      <Starfield />
       <Navbar />
       <main>
         <Hero />
