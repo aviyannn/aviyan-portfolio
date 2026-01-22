@@ -7,6 +7,7 @@ import Experience from "./sections/Experience";
 import Projects from "./sections/Projects";
 import Education from "./sections/Education";
 import Contact from "./sections/Contact";
+import Footer from "./sections/Footer";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <Projects />
         <Education />
         <Contact />
+        <Footer />
       </main>
     </div>
   );

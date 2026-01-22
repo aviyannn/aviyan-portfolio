@@ -414,3 +414,10 @@ body {
     rgba(2, 6, 23, 0) 72%
   );
 }
+
+.site-footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
