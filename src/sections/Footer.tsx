@@ -1,8 +1,10 @@
 import React from "react";
+import { profile } from "../data";
 
 const Footer: React.FC = () => (
   <footer className="site-footer">
-    <p>© {new Date().getFullYear()} Aviyan Dhital</p>
+    <span>{profile.name}</span>
+    <span>{new Date().getFullYear()}</span>
   </footer>
 );
 
