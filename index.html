@@ -2,9 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aviyandhital.com.np</title>
+    <meta
+      name="description"
+      content="Aviyan Dhital — Computer Science student at Texas State University building web, data, and security projects."
+    />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <!-- One link per family: Fontshare only serves the first font of a combined request. -->
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" />
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=erode@1&display=swap" />
+    <title>Aviyan Dhital</title>
+    <script>
+      try {
+        const t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

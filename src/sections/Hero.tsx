@@ -1,118 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import avatar from "../assets/aviyan.jpeg";
-import emailIcon from "../assets/email.png";
-import githubIcon from "../assets/github.png";
-import instagramIcon from "../assets/instagram.webp";
-import linkedinIcon from "../assets/linkedin.webp";
-import twitterIcon from "../assets/twitter.png";
-import { TechBackground } from "../components/TechBackground";
+import Icon from "../components/Icon";
+import LocalTime from "../components/LocalTime";
+import { profile, socials, spotify } from "../data";
 
-const roles = ["Web Developer", "Cybersecurity Enthusiast", "Systems Learner"];
-
-const Hero: React.FC = () => {
-  const [roleIndex, setRoleIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(
-      () => setRoleIndex((i) => (i + 1) % roles.length),
-      2200
-    );
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <section id="top" className="hero hero-row hero-has-bg">
-      {/* Background ONLY for Hero */}
-      <div className="hero-bg">
-        <TechBackground />
-      </div>
-
-      {/* LEFT: text (direct child of hero-row) */}
-      <div className="hero-right hero-stack">
-        <p className="hero-kicker">SOFTWARE</p>
-
-        <h2 className="hero-role">
-          <span className="hero-role-static">RESEARCHER.</span>
-        </h2>
-
-        <p className="hero-rotating-role">{roles[roleIndex]}</p>
-
-        <p className="hero-body hero-body-wide">
-          I build simple, fast web experiences and care about how secure they
-          are. Currently studying Computer Science at Texas State University and
-          exploring modern web stacks, systems, and secure coding practices.
+const Hero: React.FC = () => (
+  <section id="top" className="hero">
+    <div className="hero-head">
+      <img className="hero-avatar" src={avatar} alt="Aviyan Dhital" />
+      <div>
+        <h1 className="hero-name">{profile.name}</h1>
+        <p className="hero-sub">
+          <span>/</span> CS + Applied Math @ Texas State <span>/</span> San Marcos, TX
         </p>
-
-        <div className="hero-actions">
-          <a href="#projects" className="btn primary">
-            View projects
-          </a>
-          <a href="#contact" className="btn ghost">
-            Contact me
-          </a>
-        </div>
       </div>
+    </div>
 
-      {/* RIGHT: photo + name card (direct child of hero-row) */}
-      <div className="hero-card">
-        <div className="hero-card-photo">
-          <img src={avatar} alt="Aviyan Dhital" />
-        </div>
+    <p className="hero-tagline">{profile.tagline}</p>
 
-        <div className="hero-card-body">
-          <h1 className="hero-card-name">
-            Aviyan
-            <br />
-            Dhital
-          </h1>
-
-          <p className="hero-card-meta">CS @ Texas State · Web dev · Security</p>
-
-          <div className="hero-links hero-card-links">
-            <a href="mailto:aviyandhital@gmail.com">
-              <img src={emailIcon} alt="Email" />
-            </a>
-
+    <div className="hero-rows">
+      <div className="hero-row">
+        <span className="eq" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </span>
+        {profile.onRepeat.song ? (
+          <>
+            <span className="muted">On repeat</span>
+            <span className="muted">—</span>
             <a
-              href="https://linkedin.com/in/aviyandhital"
+              href={profile.onRepeat.href || spotify.profile}
               target="_blank"
               rel="noreferrer"
+              className="song-link"
             >
-              <img src={linkedinIcon} alt="LinkedIn" />
+              {profile.onRepeat.song}
             </a>
-
-            <a
-              href="https://github.com/aviyannn"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={githubIcon} alt="GitHub" />
+            {profile.onRepeat.artist && (
+              <span className="muted">· {profile.onRepeat.artist}</span>
+            )}
+          </>
+        ) : (
+          <>
+            <span className="muted">Listening on Spotify</span>
+            <span className="muted">—</span>
+            <a href={spotify.profile} target="_blank" rel="noreferrer" className="song-link">
+              {spotify.username}
             </a>
-
-            <a
-              href="https://instagram.com/aviyan__"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={instagramIcon} alt="Instagram" />
-            </a>
-
-            <a href="https://x.com/AviYawns" target="_blank" rel="noreferrer">
-              <img src={twitterIcon} alt="X (Twitter)" />
-            </a>
-          </div>
-
-          <a
-            href="/Aviyan-Dhital-Resume.pdf"
-            download
-            className="btn primary hero-card-resume"
-          >
-            Download resume
-          </a>
-        </div>
+          </>
+        )}
       </div>
-    </section>
-  );
-};
+      <div className="hero-row">
+        <span aria-hidden="true">{profile.currentlyEmoji}</span>
+        <span className="muted">{profile.currentlyLabel}</span>
+        <span className="muted">—</span>
+        <span>{profile.currently}</span>
+      </div>
+      <div className="hero-row">
+        <LocalTime />
+      </div>
+    </div>
+
+    <div className="pill-row">
+      {socials.map((s) => (
+        <a
+          key={s.label}
+          href={s.href}
+          className="pill"
+          target={s.href.startsWith("http") || s.icon === "file" ? "_blank" : undefined}
+          rel="noreferrer"
+        >
+          <Icon name={s.icon} size={13} />
+          {s.label}
+        </a>
+      ))}
+    </div>
+  </section>
+);
 
 export default Hero;
