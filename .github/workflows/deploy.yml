@@ -1,0 +1,38 @@
+# Builds the site and publishes it to the gh-pages branch, which GitHub Pages serves
+# at aviyandhital.com.np. Runs on every push to main, or manually from the Actions tab.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write # needed to push the built site to gh-pages
+
+# Don't let two deploys race; the newest push wins.
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          commit_message: Deploy ${{ github.sha }}
